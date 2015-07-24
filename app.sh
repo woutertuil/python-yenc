@@ -11,11 +11,11 @@ export QEMU_LD_PREFIX="${TOOLCHAIN}/${HOST}/libc"
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
 sed -e "s|from distutils.core import setup, Extension|from setuptools import setup\nfrom distutils.core import Extension|g" -i setup.py
-LDSHARED="${CC} -shared -Wl,-rpath,/mnt/DroboFS/Share/DroboApps/python2/lib -L${XPYTHON}/lib" \
+PKG_CONFIG_PATH="${XPYTHON}/lib/pkgconfig" \
+  LDFLAGS="${LDFLAGS:-} -Wl,-rpath,/mnt/DroboFS/Share/DroboApps/python2/lib -L${XPYTHON}/lib" \
   "${XPYTHON}/bin/python" setup.py build_ext \
   --include-dirs="${XPYTHON}/include" --library-dirs="${XPYTHON}/lib" \
   --force build --force bdist_egg --dist-dir "${BASE}"
-#_PYTHON_HOST_PLATFORM="linux-armv7l" LDSHARED="${CC} -shared -Wl,-rpath,/mnt/DroboFS/Share/DroboApps/python2/lib -L${DEST}/lib-5n" "${XPYTHON}/bin/python" setup.py build_ext --include-dirs="${XPYTHON}/include-${DROBO}" --library-dirs="${XPYTHON}/lib-${DROBO}" --force build --force bdist_egg --dist-dir ../..
 popd
 }
 
