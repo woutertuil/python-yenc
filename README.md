@@ -14,7 +14,7 @@ First make sure that you have a [working cross-compiling VM](https://github.com/
 Log in the VM, pick a temporary folder (e.g., `~/build`), and then do:
 
 ```
-git clone https://github.com/droboports/python-yenc.git
+git clone https://github.com/woutertuil/sabyenc.git
 cd python-yenc
 ./build.sh
 ls -la *.egg
